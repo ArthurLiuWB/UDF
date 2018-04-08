@@ -1,4 +1,4 @@
-package com.jd.model;
+package com.jd.model.udf;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FSDataInputStream;
@@ -56,21 +56,24 @@ public class MapCacheManager {
                     for (int i = 0; i< headRow.length; i++) {
                         headMap.put(headMap.get(String.valueOf(i)), headRow[i]);
                     }
-                    Map<String, String> tagMap = new HashMap<String, String>();
+                    Map<String, String> flagMap = new HashMap<String, String>();
                     if (lineMap.get("keyword_flag") != null) {
-                        tagMap.put("keyword_flag", lineMap.get("keyword_flag"));
+                        flagMap.put("keyword_flag", lineMap.get("keyword_flag"));
                     }
                     if (lineMap.get("shop_flag") != null) {
-                        tagMap.put("shop_flag", lineMap.get("shop_flag"));
+                        flagMap.put("shop_flag", lineMap.get("shop_flag"));
                     }
                     if (lineMap.get("order_flag") != null) {
-                        tagMap.put("order_flag", lineMap.get("order_flag"));
+                        flagMap.put("order_flag", lineMap.get("order_flag"));
                     }
                     if (lineMap.get("sku_flag") != null) {
-                        tagMap.put("sku_flag", lineMap.get("sku_flag"));
+                        flagMap.put("sku_flag", lineMap.get("sku_flag"));
+                    }
+                    if (lineMap.get("keyword_parse_type") != null) {
+                        flagMap.put("keyword_parse_type", lineMap.get("keyword_parse_type"));
                     }
                     if (lineMap.get("event_id") != null && !"".equals(lineMap.get("event_id"))) {
-                        mapCache.put(lineMap.get("event_id"),tagMap);
+                        mapCache.put(lineMap.get("event_id"), flagMap);
                     }
                 }
                 rowNumber++;

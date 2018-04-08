@@ -1,5 +1,6 @@
-package com.jd.model;
+package com.jd.model.udf;
 
+import com.jd.model.ExcelData;
 import org.junit.Test;
 
 import java.io.File;

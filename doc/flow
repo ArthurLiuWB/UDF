@@ -1,0 +1,58 @@
+1. 维表：以纯文本的方式\t分隔。
+2. 将UDF加载到hive，命名使用方法。
+    /**
+     * 使用UDF
+     * 1. 编译Java代码，然后将编译后的UDF二进制类文件打成jar包。
+     * 2. 在hive会话中将这个jar包加入到类路径下
+     * 3. 通过CREATE FUNCTION 语句定义好使用这个java类的函数
+     */
+    hive> ADD JAR /fullpath/zodiac.jar
+    hive> CREATE TEMPRARY FUNCTION zodiac
+    > AS 'package.UDFZodiacSign';
+3. 在sql中调用UDF
+4. 新建UDF，清空mapCache，从hive中加载数据到mapCache。
+5. 根据传参匹配evaluate方法，
+6. 若是wq、pc：
+    （1）截取tar_url的host
+    （2）根据host去匹配mapCache中的flag_map
+    （3）根据参数flag,获取flag_map中对应的提取规则
+    （4）最后根据规则截取tar_url作为返回。
+7. 若是app、m：
+    （1）根据event_id去匹配mapCache中的flag_map
+    （2）根据参数flag,获取flag_map中对应的提取规则
+    （3）根据参数keyword_parse_type，获取flag_map中对应的解析方式
+        若结果是json，通过key拿到value返回。
+        若结果是_,根据_拆分成字符数组，返回提取规则位置的字符串。
+        若结果是url，根据url
+8. 静态map结构：
+{
+	"event_id_1": {
+		"keyword_flag": "",
+		"shop_flag": "",
+		"order_flag": "",
+		"sku_flag": "",
+		"keyword_parse_type":""
+	},
+	"event_id_2": {
+        "keyword_flag": "",
+        "shop_flag": "",
+        "order_flag": "",
+        "sku_flag": "",
+        "keyword_parse_type":""
+	},
+	"host_1": {
+		"keyword_flag": "",
+		"shop_flag": "",
+		"order_flag": "",
+		"sku_flag": "",
+		"keyword_parse_type":""
+	},
+	"host_2": {
+		"keyword_flag": "",
+		"shop_flag": "",
+		"order_flag": "",
+		"sku_flag": "",
+		"keyword_parse_type":""
+	}
+    ......
+}

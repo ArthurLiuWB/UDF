@@ -1,6 +1,6 @@
-package com.jd.model;
+package com.jd.model.udf;
 
-import com.jd.model.UDFParseField;
+import com.jd.model.util.CommonUtil;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 
@@ -42,10 +42,10 @@ public class UDFParseFieldTest {
         String url2 = "wqitem.jd.com/item/view?sku=5512096";
         String url3 = "http://item.jd.hk/1976213839.html";
         String url4 = "https://item.jd.hk/1976213839.html";
-        System.out.println("解析结果：" + UDFParseField.getHost(url1));
-        System.out.println("解析结果：" + UDFParseField.getHost(url2));
-        System.out.println("解析结果：" + UDFParseField.getHost(url3));
-        System.out.println("解析结果：" + UDFParseField.getHost(url4));
+        System.out.println("解析结果：" + CommonUtil.getHost(url1));
+        System.out.println("解析结果：" + CommonUtil.getHost(url2));
+        System.out.println("解析结果：" + CommonUtil.getHost(url3));
+        System.out.println("解析结果：" + CommonUtil.getHost(url4));
 
     }
 }
